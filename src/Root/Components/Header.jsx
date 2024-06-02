@@ -34,7 +34,7 @@ const NavBar = () => {
       <div className="hidden md:flex md:items-center md:justify-between md:gap-16 w-full md:w-auto md:flex-row">
         <ul className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-10">
           <li className="group cursor-pointer">
-            <NavLink exact to="/" activeclassname="active" className="nav-link">
+            <NavLink to="/" activeclassname="active" className="nav-link">
               Home
             </NavLink>
           </li>
@@ -48,7 +48,7 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li className="group cursor-pointer">
-            <NavLink to="/about" activeClassName="active" className="nav-link">
+            <NavLink to="/about" activeclassname="active" className="nav-link">
               About
             </NavLink>
           </li>
@@ -63,12 +63,18 @@ const NavBar = () => {
           </li>
         </ul>
         <div className="flex flex-col md:flex-row items-center justify-between gap-2 md:gap-5 mt-4 md:mt-0">
-          <button className="rounded-full bg-gradient-to-r from-blue-700 to-teal-600 px-4 py-2 text-white transition-transform duration-300 hover:scale-95 md:px-6">
-            Log In
-          </button>
-          <button className="rounded-full bg-gradient-to-r from-green-600 to-blue-700 px-4 py-2 text-white transition-transform duration-300 hover:scale-95 md:px-6">
+          <NavLink
+            to={"/login"}
+            className="rounded-full bg-gradient-to-r from-blue-700 to-indigo-600 px-4 py-2 text-white transition-transform duration-300 hover:scale-95 md:px-6"
+          >
+            Login
+          </NavLink>
+          <NavLink
+            to={"/register"}
+            className="rounded-full bg-gradient-to-r from-indigo-600 to-blue-700 px-4 py-2 text-white transition-transform duration-300 hover:scale-95 md:px-6"
+          >
             Register
-          </button>
+          </NavLink>
         </div>
       </div>
       <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
@@ -103,14 +109,14 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
       </div>
       <ul className="flex flex-col items-center gap-4 mt-10">
         <li className="group cursor-pointer text-xl text-white">
-          <NavLink exact to="/" activeclassname="active" className="nav-link">
+          <NavLink to="/" activeclassname="active" className="nav-link">
             Home
           </NavLink>
         </li>
         <li className="group cursor-pointer text-xl text-white">
           <NavLink
             to="/allproperties"
-            activeClassName="active"
+            activeclassname="active"
             className="nav-link"
           >
             All Properties
@@ -129,11 +135,14 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
       </ul>
       <div className="flex flex-col items-center gap-5 mt-10">
         <button className="rounded-full bg-gradient-to-r from-blue-700 to-teal-600 px-6 py-2 text-white transition-transform duration-300 hover:scale-95">
-          Log In
+          <NavLink to={"/login"}>Log In</NavLink>
         </button>
-        <button className="rounded-full bg-gradient-to-r from-green-600 to-blue-700 px-6 py-2 text-white transition-transform duration-300 hover:scale-95">
+        <NavLink
+          to={"/register"}
+          className="rounded-full bg-gradient-to-r from-green-600 to-blue-700 px-6 py-2 text-white transition-transform duration-300 hover:scale-95"
+        >
           Register
-        </button>
+        </NavLink>
       </div>
     </div>
   );
