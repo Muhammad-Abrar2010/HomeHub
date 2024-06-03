@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import GetEstateData from "../../../Hooks/GetEstateData";
 
 const Advertisement = () => {
@@ -24,12 +25,12 @@ const Advertisement = () => {
             <p className="text-gray-700 mt-2">
               Verification Status: {estate.verification_status}
             </p>
-            <button
+            <Link to={`/property/${estate._id}`}
               className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              onClick={() => (window.location.href = `/estate/${estate._id}`)}
+              
             >
               Details
-            </button>
+            </Link>
           </div>
         </div>
       ))}

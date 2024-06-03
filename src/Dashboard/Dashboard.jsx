@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, Link } from "react-router-dom";
 import { MdMenu, MdClose } from "react-icons/md";
 
 function Dashboard() {
@@ -25,12 +25,12 @@ function Dashboard() {
           <li className="group cursor-pointer text-xl text-white">
             <NavLink
               exact
-              to="/"
+              to="/dashboard/myprofile"
               activeClassName="active"
               className="nav-link"
               onClick={toggleSidebar}
             >
-              Home
+              My Profile
             </NavLink>
           </li>
           <li className="group cursor-pointer text-xl text-white">
@@ -64,42 +64,28 @@ function Dashboard() {
             </NavLink>
           </li>
         </ul>
-        <div className="flex flex-col items-center gap-5 mt-10">
-          <NavLink
-            to="/login"
-            className="rounded-full bg-gradient-to-r from-blue-700 to-teal-600 px-6 py-2 text-white transition-transform duration-300 hover:scale-95"
-            onClick={toggleSidebar}
-          >
-            Log In
-          </NavLink>
-          <NavLink
-            to="/register"
-            className="rounded-full bg-gradient-to-r from-green-600 to-blue-700 px-6 py-2 text-white transition-transform duration-300 hover:scale-95"
-            onClick={toggleSidebar}
-          >
-            Register
-          </NavLink>
-        </div>
       </div>
       <button
-          onClick={toggleSidebar}
-          className="md:hidden absolute right-5 top-5 text-white bg-gray-800 p-2 rounded-full"
-        >
-          <MdMenu className="w-8 h-8 text-white" />
-        </button>
+        onClick={toggleSidebar}
+        className="md:hidden absolute right-5 top-5 text-white bg-gray-800 p-2 rounded-full"
+      >
+        <MdMenu className="w-8 h-8 text-white" />
+      </button>
       <div className="w-64 bg-gray-800 hidden lg:grid">
-        <div className="flex items-center justify-center mt-4 md:mt-10">
-          <h1 className="text-white text-2xl">Dashboard</h1>
+        <div className="grid   items-center justify-center mt-4 md:mt-10">
+          <h1 className="text-white text-2xl">Home-Hub</h1>
+          <br />
+          <Link to={"/dashboard"} className="text-white text-2xl">Dashboard</Link>
         </div>
-    
+
         <nav className="mt-4 md:mt-10">
           <NavLink
             exact
-            to="/"
+            to="/dashboard/myprofile"
             className="flex items-center mt-2 py-2 px-6 text-gray-200 hover:bg-gray-700"
             activeClassName="active"
           >
-            Home
+            My Profile
           </NavLink>
           <NavLink
             to="/allproperties"

@@ -20,7 +20,11 @@ const Firebaseprovider = ({ children }) => {
   const axiosPublic = useaxiosPublic();
 
   const googleProvider = new GoogleAuthProvider();
-
+  const reloadPage=()=> {
+    setTimeout(function () {
+      location.reload();
+    }, 1500);
+  }
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -30,8 +34,6 @@ const Firebaseprovider = ({ children }) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
-
-
 
   const loginGoogle = () => {
     setLoading(true);
@@ -48,6 +50,19 @@ const Firebaseprovider = ({ children }) => {
           .then((res) => console.log(res.data));
       })
       .catch((error) => toast.error(error.message));
+  };
+
+  const updateProfileInfo = (displayName, photoURL) => {
+    if (auth.currentUser) {
+      toast.success("profile update successfull");
+      reloadPage();
+      return updateProfile(auth.currentUser, {
+        displayName: displayName,
+        photoURL: photoURL,
+      });
+    } else {
+      return toast.error("No user is currently logged in");
+    }
   };
 
   useEffect(() => {
@@ -73,6 +88,7 @@ const Firebaseprovider = ({ children }) => {
     logout,
     loginGoogle,
     loading,
+    updateProfileInfo,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

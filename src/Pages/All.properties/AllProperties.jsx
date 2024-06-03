@@ -24,9 +24,9 @@ const AllProperties = () => {
               <p className="text-gray-700 mt-2">
                 Verification Status: {estate.verification_status}
               </p>
-              <Link to={`/estate/${estate._id}`}
+              <Link
+                to={`/property/${estate._id}`}
                 className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                
               >
                 Details
               </Link>
@@ -35,7 +35,6 @@ const AllProperties = () => {
         ))}
       </div>{" "}
     </div>
-    
   );
 };
 

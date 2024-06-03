@@ -5,7 +5,9 @@ import AllProperties from "./Pages/All.properties/AllProperties";
 import NotFound from "./Pages/Notfound";
 import Login from "./Pages/Firebase/Auth/Login";
 import Register from "./Pages/Firebase/Auth/Register";
-import Dashboard from "./Pages/Dashboard/Dashboard";
+import Dashboard from "./Dashboard/Dashboard";
+import MyProfile from "./Dashboard/Pages_Dashboard/MyProfile";
+import PropertyDetails from "./Pages/PropertyDetails";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -18,6 +20,9 @@ export const router = createBrowserRouter([
       {
         path: "/allproperties",
         element: <AllProperties></AllProperties>,
+      },
+      {path:"/property/:id",
+        element:<PropertyDetails></PropertyDetails>,
       },
       {
         path: "/login",
@@ -39,9 +44,9 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: <AllProperties></AllProperties>,
+        element: <MyProfile></MyProfile>,
       },
-      { path: "/dashboard/lol", element: <Login></Login> },
+      { path: "/dashboard/myprofile", element: <MyProfile></MyProfile> },
     ],
   },
 ]);
