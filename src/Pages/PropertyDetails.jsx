@@ -1,23 +1,53 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import GetEstateData from "../Hooks/GetEstateData";
-import { FaMapMarkerAlt, FaDollarSign, FaCheckCircle, FaInfoCircle } from "react-icons/fa";
+import {
+  FaMapMarkerAlt,
+  FaDollarSign,
+  FaCheckCircle,
+  FaInfoCircle,
+  FaHeart,
+  FaRegHeart,
+} from "react-icons/fa";
 import { FadeLoader } from "react-spinners";
+import toast from "react-hot-toast";
+import useWishlist from "../Hooks/useWishlist";
+import "sweetalert2/src/sweetalert2.scss";
 
 const PropertyDetails = () => {
   const { id } = useParams();
   const estates = GetEstateData();
   const [estate, setEstate] = useState(null);
+  const { wishlist,  toggleWishlist } = useWishlist();
 
   useEffect(() => {
     const selectedEstate = estates.find((estate) => estate._id === id);
     setEstate(selectedEstate);
   }, [id, estates]);
+  const reloadPage=()=> {
+    setTimeout(function () {
+      location.reload();
+    }, 500);
+  }
+  const isWishlisted = wishlist.some((item) => item.estateId === id);
+
+  const handleToggleWishlist = async () => {
+    await toggleWishlist(id);
+    if (isWishlisted) {
+      toast.success("Removed from wishlist");
+    } else {
+      toast.success("Added to wishlist");
+      reloadPage();
+    }
+    
+  };
 
   if (!estate) {
-    return <div className="flex justify-center items-center h-screen">
-      <FadeLoader/>
-    </div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <FadeLoader />
+      </div>
+    );
   }
 
   return (
@@ -28,7 +58,14 @@ const PropertyDetails = () => {
         alt={estate.property_title}
       />
       <div className="p-6">
-        <h2 className="text-3xl font-bold mt-4 mb-2">{estate.property_title}</h2>
+        <div className="flex justify-between items-center">
+          <h2 className="text-3xl font-bold mt-4 mb-2">
+            {estate.property_title}
+          </h2>
+          <button className="text-red-500 text-2xl" onClick={handleToggleWishlist}>
+            {!isWishlisted ? <FaRegHeart /> : <FaHeart />}
+          </button>
+        </div>
         <div className="flex items-center text-gray-700 mb-2">
           <FaMapMarkerAlt className="mr-2" />
           <span>Location: {estate.property_location}</span>
@@ -51,5 +88,3 @@ const PropertyDetails = () => {
 };
 
 export default PropertyDetails;
-
-

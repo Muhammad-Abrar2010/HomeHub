@@ -8,6 +8,11 @@ import Register from "./Pages/Firebase/Auth/Register";
 import Dashboard from "./Dashboard/Dashboard";
 import MyProfile from "./Dashboard/Pages_Dashboard/MyProfile";
 import PropertyDetails from "./Pages/PropertyDetails";
+import Wishlist from "./Dashboard/Pages_Dashboard/Wishlist";
+import Offer from "./Dashboard/Pages_Dashboard/Offer";
+import PropertyBought from "./Dashboard/Pages_Dashboard/PropertyBought";
+import MyReviews from "./Dashboard/Pages_Dashboard/MyReview";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -21,9 +26,7 @@ export const router = createBrowserRouter([
         path: "/allproperties",
         element: <AllProperties></AllProperties>,
       },
-      {path:"/property/:id",
-        element:<PropertyDetails></PropertyDetails>,
-      },
+      { path: "/property/:id", element: <PropertyDetails></PropertyDetails> },
       {
         path: "/login",
         element: <Login></Login>,
@@ -47,6 +50,16 @@ export const router = createBrowserRouter([
         element: <MyProfile></MyProfile>,
       },
       { path: "/dashboard/myprofile", element: <MyProfile></MyProfile> },
+      { path: "/dashboard/wishlist", element: <Wishlist></Wishlist> },
+      { path: "/dashboard/make-offer", element: <Offer></Offer> },
+      {
+        path: "/dashboard/property-bought",
+        element: <PropertyBought></PropertyBought>,
+      },
+      {
+        path:"/dashboard/my-reviews",
+        element:<MyReviews></MyReviews>
+      }
     ],
   },
 ]);

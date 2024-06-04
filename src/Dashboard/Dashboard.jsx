@@ -35,22 +35,22 @@ function Dashboard() {
           </li>
           <li className="group cursor-pointer text-xl text-white">
             <NavLink
-              to="/allproperties"
+              to="/dashboard/wishlist"
               activeClassName="active"
               className="nav-link"
               onClick={toggleSidebar}
             >
-              All Properties
+              WishList
             </NavLink>
           </li>
           <li className="group cursor-pointer text-xl text-white">
             <NavLink
-              to="/about"
+              to="/dashboard/property-bought"
               activeClassName="active"
               className="nav-link"
               onClick={toggleSidebar}
             >
-              About
+              Property Bought
             </NavLink>
           </li>
           <li className="group cursor-pointer text-xl text-white">
@@ -88,11 +88,11 @@ function Dashboard() {
             My Profile
           </NavLink>
           <NavLink
-            to="/allproperties"
+            to="/dashboard/wishlist"
             className="flex items-center mt-2 py-2 px-6 text-gray-200 hover:bg-gray-700"
             activeClassName="active"
           >
-            All Properties
+            WishList
           </NavLink>
           <NavLink
             to="/about"
@@ -102,11 +102,11 @@ function Dashboard() {
             About
           </NavLink>
           <NavLink
-            to="/contact"
+            to="/dashboard/property-bought"
             className="flex items-center mt-2 py-2 px-6 text-gray-200 hover:bg-gray-700"
             activeClassName="active"
           >
-            Contact
+            Property Bought
           </NavLink>
         </nav>
       </div>
