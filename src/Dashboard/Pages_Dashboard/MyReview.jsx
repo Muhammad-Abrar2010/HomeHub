@@ -1,83 +1,65 @@
 import { useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
-import { FadeLoader } from "react-spinners";
 import toast from "react-hot-toast";
-import useAxiosPublic from "../../Hooks/Axios/useAxiosPublic";
+import useAxiosSecure from "../../Hooks/Axios/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 
+
 const MyReviews = () => {
-  const { user, loading } = useAuth();
-  const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
   const [reviews, setReviews] = useState([]);
-  const userEmail = loading || (user && user.email);
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    const fetchMyReviews = async () => {
-      try {
-        const response = await axiosPublic.get(`/my-reviews/${userEmail}`);
-        setReviews(response.data.reviews);
-      } catch (error) {
-        console.error("Failed to fetch reviews", error);
-      }
-    };
-
-    if (userEmail) {
-      fetchMyReviews();
+    if (user) {
+      fetchUserReviews(user.email);
     }
-  }, [userEmail, axiosPublic]);
+  }, [user,axiosSecure]);
 
-  const deleteReview = async (reviewId) => {
+  const fetchUserReviews = async (email) => {
     try {
-      const response = await axiosPublic.delete(`/reviews/${reviewId}`);
-      if (response.status === 200) {
-        setReviews(reviews.filter((review) => review._id !== reviewId));
-        toast.success("Review deleted successfully");
-      } else {
-        toast.error("Failed to delete review");
-      }
+      const response = await axiosSecure.get(`/reviews/user/${email}`);
+      setReviews(response.data);
     } catch (error) {
-      toast.error("Failed to delete review");
-      console.error("Failed to delete review:", error);
+      console.error("Error fetching user reviews:", error);
+      toast.error("Failed to fetch reviews");
     }
   };
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <FadeLoader />
-      </div>
-    );
-  }
+  const handleDeleteReview = async (reviewId) => {
+    try {
+      await axiosSecure.delete(`/reviews/${reviewId}`);
+      setReviews((prevReviews) => prevReviews.filter(review => review._id !== reviewId));
+      toast.success("Review deleted successfully");
+    } catch (error) {
+      console.error("Error deleting review:", error);
+      toast.error("Failed to delete review");
+    }
+  };
 
   return (
     <div className="max-w-4xl mx-auto p-4 bg-white shadow-lg rounded-lg overflow-hidden">
-      <h2 className="text-3xl font-bold mt-4 mb-6">My Reviews</h2>
-      {reviews.length > 0 ? (
-        reviews.map((review) => (
-          <div
-            key={review._id}
-            className="mb-4 p-4 border rounded-lg shadow-sm"
-          >
-            <h3 className="text-2xl font-semibold">{review.property_title}</h3>
-            <p className="text-gray-700">
-              <strong>Agent Name:</strong> {review.agent_name}
-            </p>
-            <p className="text-gray-500 text-sm">
-              <strong>Review Time:</strong>{" "}
-              {new Date(review.date).toLocaleString()}
-            </p>
-            <p className="text-gray-700 mt-2">{review.text}</p>
-            <button
-              className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-              onClick={() => deleteReview(review._id)}
-            >
-              <FaTrash className="inline mr-2" /> Delete Review
-            </button>
+      <h2 className="text-3xl font-bold mt-4 mb-2">My Reviews</h2>
+      <div>
+        {reviews.map((review) => (
+          <div key={review._id} className="mb-4 p-4 bg-gray-100 rounded-lg">
+            <div className="flex justify-between items-center mb-2">
+              <div>
+                <h3 className="text-xl font-bold">{review.estateId}</h3>
+                <p className="text-gray-600">{review.userName}</p>
+                <p className="text-gray-600">{new Date(review.reviewTime).toLocaleDateString()}</p>
+                <p className="mt-2">{review.reviewText}</p>
+              </div>
+              <button
+                onClick={() => handleDeleteReview(review._id)}
+                className="text-red-500"
+              >
+                <FaTrash />
+              </button>
+            </div>
           </div>
-        ))
-      ) : (
-        <p className="text-gray-500">No reviews yet. Start reviewing properties!</p>
-      )}
+        ))}
+      </div>
     </div>
   );
 };

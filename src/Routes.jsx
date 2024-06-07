@@ -57,9 +57,14 @@ export const router = createBrowserRouter([
         element: <PropertyBought></PropertyBought>,
       },
       {
-        path:"/dashboard/my-reviews",
-        element:<MyReviews></MyReviews>
-      }
+        path: "/dashboard/my-reviews",
+        element: <MyReviews></MyReviews>,
+      },
+      { path: "/dashboard/agent-profile",
+       element: <MyProfile></MyProfile> },
+       {
+        
+       }
     ],
   },
 ]);

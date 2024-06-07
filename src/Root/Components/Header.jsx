@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import AvatarDropDown from "./AvatarDropDown"
+import useAuth from "../../Hooks/useAuth";
 
 const NavBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -7,6 +9,7 @@ const NavBar = () => {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+  const {user,loading} = useAuth();
 
   return (
     <nav className="flex items-center justify-between bg-gradient-to-r from-gray-800 via-gray-900 to-black px-4 py-2 text-white shadow-lg">
@@ -62,7 +65,7 @@ const NavBar = () => {
             </NavLink>
           </li>
         </ul>
-        <div className="flex flex-col md:flex-row items-center justify-between gap-2 md:gap-5 mt-4 md:mt-0">
+        {!user?(<div className="flex flex-col md:flex-row items-center justify-between gap-2 md:gap-5 mt-4 md:mt-0">
           <NavLink
             to={"/login"}
             className="rounded-full bg-gradient-to-r from-blue-700 to-indigo-600 px-4 py-2 text-white transition-transform duration-300 hover:scale-95 md:px-6"
@@ -75,7 +78,7 @@ const NavBar = () => {
           >
             Register
           </NavLink>
-        </div>
+        </div>):<AvatarDropDown/>}
       </div>
       <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
     </nav>

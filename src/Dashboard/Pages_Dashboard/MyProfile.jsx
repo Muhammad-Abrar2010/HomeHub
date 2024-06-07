@@ -50,8 +50,8 @@ const MyProfile = () => {
         <div className="flex flex-col items-center lg:w-1/2">
           <img
             className="w-32 h-32 rounded-full object-cover mb-4"
-            src={user && user.photoURL}
-            alt={user&& user.displayName}
+            src={user?.photoURL}
+            alt={user?.displayName}
           />
           <div className="text-left w-full">
             <p className="text-lg mb-2">
