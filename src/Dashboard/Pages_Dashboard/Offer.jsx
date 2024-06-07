@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/Axios/useAxiosPublic";
@@ -15,18 +16,28 @@ const Offer = () => {
 
   const handleOfferSubmit = async (e) => {
     e.preventDefault();
-    const priceRange = property.price_range.split("-");
-    const minPrice = parseFloat(priceRange[0].trim());
-    const maxPrice = parseFloat(priceRange[1].trim());
+    
+    // Validate the property and price range
+    if (!property || !property.price_range) {
+      setError("Invalid property data.");
+      return;
+    }
 
-    if (offeredAmount < minPrice || offeredAmount > maxPrice) {
-      setError("Offered amount must be within the specified price range.");
+    const price = parseFloat(property.price_range);
+
+    if (isNaN(price)) {
+      setError("Invalid price range value.");
+      return;
+    }
+
+    if (offeredAmount === price) {
+      setError("Offered amount must be exactly the specified price.");
       return;
     }
 
     try {
       await axiosPublic.post("/offers", {
-        estateId: property.estateId,
+        estateId: property._id,
         property_title: property.property_title,
         property_location: property.property_location,
         agent_name: property.agent_name,
@@ -53,7 +64,7 @@ const Offer = () => {
           <label className="block text-gray-700">Property Title</label>
           <input
             type="text"
-            value={property.property_title}
+            value={property?.property_title || ""}
             readOnly
             className="w-full border p-2 rounded"
           />
@@ -62,7 +73,7 @@ const Offer = () => {
           <label className="block text-gray-700">Property Location</label>
           <input
             type="text"
-            value={property.property_location}
+            value={property?.property_location || ""}
             readOnly
             className="w-full border p-2 rounded"
           />
@@ -71,7 +82,7 @@ const Offer = () => {
           <label className="block text-gray-700">Agent Name</label>
           <input
             type="text"
-            value={property.agent_name}
+            value={property?.agent_name || ""}
             readOnly
             className="w-full border p-2 rounded"
           />
@@ -90,7 +101,7 @@ const Offer = () => {
           <label className="block text-gray-700">Buyer Email</label>
           <input
             type="email"
-            value={user.email}
+            value={user?.email || ""}
             readOnly
             className="w-full border p-2 rounded"
           />
@@ -99,7 +110,7 @@ const Offer = () => {
           <label className="block text-gray-700">Buyer Name</label>
           <input
             type="text"
-            value={user.displayName}
+            value={user?.displayName || ""}
             readOnly
             className="w-full border p-2 rounded"
           />

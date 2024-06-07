@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/Axios/useAxiosPublic";
 import useAuth from "../../Hooks/useAuth";
 
 const PropertyBought = () => {
-//   const navigate = useNavigate();
   const [propertiesBought, setPropertiesBought] = useState([]);
   const { user, loading } = useAuth();
   const axiosPublic = useAxiosPublic();
@@ -24,6 +22,7 @@ const PropertyBought = () => {
 
     fetchPropertiesBought();
   }, [userEmail, axiosPublic]);
+  
 
   return (
     <div className="container mx-auto py-8">
@@ -52,7 +51,7 @@ const PropertyBought = () => {
               </p>
               <p className="text-gray-600 mb-2">Agent: {property.agent_name}</p>
               <p className="text-gray-600 mb-2">Offered Amount: {property.offered_amount}</p>
-              <p className="text-gray-600 mb-2">Status: {property.status}</p>
+              {property.status==="accepted"?<button>Pay</button>:"Status: Pending"}
             </div>
           ))}
         </div>

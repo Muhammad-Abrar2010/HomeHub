@@ -12,6 +12,9 @@ import Wishlist from "./Dashboard/Pages_Dashboard/Wishlist";
 import Offer from "./Dashboard/Pages_Dashboard/Offer";
 import PropertyBought from "./Dashboard/Pages_Dashboard/PropertyBought";
 import MyReviews from "./Dashboard/Pages_Dashboard/MyReview";
+import AddProperty from "./Dashboard/Pages_Dashboard/Agent_Dashboard/Addproperty";
+import MyAddedProperties from "./Dashboard/Pages_Dashboard/Agent_Dashboard/MyAddedProperties";
+import OffersList from "./Dashboard/Pages_Dashboard/Agent_Dashboard/OffersList";
 
 export const router = createBrowserRouter([
   {
@@ -63,7 +66,16 @@ export const router = createBrowserRouter([
       { path: "/dashboard/agent-profile",
        element: <MyProfile></MyProfile> },
        {
-        
+        path:"/dashboard/add-property",
+        element:<AddProperty></AddProperty>
+       },
+       {
+        path:"/dashboard/my-property",
+        element:<MyAddedProperties></MyAddedProperties>
+       },
+       {
+        path:"/dashboard/offersList",
+        element:<OffersList></OffersList>
        }
     ],
   },
