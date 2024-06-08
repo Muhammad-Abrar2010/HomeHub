@@ -15,6 +15,9 @@ import MyReviews from "./Dashboard/Pages_Dashboard/MyReview";
 import AddProperty from "./Dashboard/Pages_Dashboard/Agent_Dashboard/Addproperty";
 import MyAddedProperties from "./Dashboard/Pages_Dashboard/Agent_Dashboard/MyAddedProperties";
 import OffersList from "./Dashboard/Pages_Dashboard/Agent_Dashboard/OffersList";
+import ManageProperties from "./Dashboard/Pages_Dashboard/Admin_Dashboard/ManageProperties";
+import ManageReviews from "./Dashboard/Pages_Dashboard/Admin_Dashboard/ManageReviews";
+import ManageUsers from "./Dashboard/Pages_Dashboard/Admin_Dashboard/ManageUsers";
 
 export const router = createBrowserRouter([
   {
@@ -76,6 +79,21 @@ export const router = createBrowserRouter([
        {
         path:"/dashboard/offersList",
         element:<OffersList></OffersList>
+       },
+       {path:"/dashboard/admin-profile",
+        element:<MyProfile></MyProfile>
+       },
+       {
+        path:"/dashboard/manage-properties",
+        element:<ManageProperties></ManageProperties>
+       },
+       {
+        path:"/dashboard/manage-reviews",
+        element:<ManageReviews></ManageReviews>
+       },
+       {
+        path:"/dashboard/manage-users",
+        element:<ManageUsers></ManageUsers>
        }
     ],
   },
