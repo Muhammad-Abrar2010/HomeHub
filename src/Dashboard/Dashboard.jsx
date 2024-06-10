@@ -20,7 +20,6 @@ function Dashboard() {
       .catch((error) => console.error("Failed to fetch users", error));
   }, []);
 
-  console.log(!loading && users[0].role);
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
