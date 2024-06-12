@@ -20,6 +20,7 @@ import ManageReviews from "./Dashboard/Pages_Dashboard/Admin_Dashboard/ManageRev
 import ManageUsers from "./Dashboard/Pages_Dashboard/Admin_Dashboard/ManageUsers";
 import UpdateProperty from "./Dashboard/Pages_Dashboard/Agent_Dashboard/UpdateProperty";
 import SoldProperties from "./Dashboard/Pages_Dashboard/Agent_Dashboard/SoldProperties";
+import PrivatePage from "./Pages/PrivatePage";
 
 export const router = createBrowserRouter([
   {
@@ -34,7 +35,14 @@ export const router = createBrowserRouter([
         path: "/allproperties",
         element: <AllProperties></AllProperties>,
       },
-      { path: "/property/:id", element: <PropertyDetails></PropertyDetails> },
+      {
+        path: "/property/:id",
+        element: (
+          <PrivatePage>
+            <PropertyDetails></PropertyDetails>
+          </PrivatePage>
+        ),
+      },
       {
         path: "/login",
         element: <Login></Login>,
@@ -51,60 +59,144 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivatePage>
+        <Dashboard></Dashboard>
+      </PrivatePage>
+    ),
     children: [
       {
         path: "/dashboard",
-        element: <MyProfile></MyProfile>,
+        element: (
+          <PrivatePage>
+            <MyProfile></MyProfile>
+          </PrivatePage>
+        ),
       },
-      { path: "/dashboard/myprofile", element: <MyProfile></MyProfile> },
-      { path: "/dashboard/wishlist", element: <Wishlist></Wishlist> },
-      { path: "/dashboard/make-offer", element: <Offer></Offer> },
+      {
+        path: "/dashboard/myprofile",
+        element: (
+          <PrivatePage>
+            <MyProfile></MyProfile>{" "}
+          </PrivatePage>
+        ),
+      },
+      {
+        path: "/dashboard/wishlist",
+        element: (
+          <PrivatePage>
+            {" "}
+            <Wishlist></Wishlist>{" "}
+          </PrivatePage>
+        ),
+      },
+      {
+        path: "/dashboard/make-offer",
+        element: (
+          <PrivatePage>
+            <Offer></Offer>
+          </PrivatePage>
+        ),
+      },
       {
         path: "/dashboard/property-bought",
-        element: <PropertyBought></PropertyBought>,
+        element: (
+          <PrivatePage>
+            {" "}
+            <PropertyBought></PropertyBought>
+          </PrivatePage>
+        ),
       },
       {
         path: "/dashboard/my-reviews",
-        element: <MyReviews></MyReviews>,
+        element: (
+          <PrivatePage>
+            <MyReviews></MyReviews>
+          </PrivatePage>
+        ),
       },
-      { path: "/dashboard/agent-profile",
-       element: <MyProfile></MyProfile> },
-       {
-        path:"/dashboard/add-property",
-        element:<AddProperty></AddProperty>
-       },
-       {
-        path:"/dashboard/my-property",
-        element:<MyAddedProperties></MyAddedProperties>
-       },
-       {
-        path:"/dashboard/offersList",
-        element:<OffersList></OffersList>
-       },
-       {path:"/dashboard/admin-profile",
-        element:<MyProfile></MyProfile>
-       },
-       {
-        path:"/dashboard/manage-properties",
-        element:<ManageProperties></ManageProperties>
-       },
-       {
-        path:"/dashboard/manage-reviews",
-        element:<ManageReviews></ManageReviews>
-       },
-       {
-        path:"/dashboard/manage-users",
-        element:<ManageUsers></ManageUsers>
-       },
-       {
-        path:"/dashboard/updateProperty/:id",
-        element:<UpdateProperty></UpdateProperty>,
-       },
-       {
-        path:"/dashboard/sold-properties",
-        element:<SoldProperties></SoldProperties>
-       }
+      {
+        path: "/dashboard/agent-profile",
+        element: (
+          <PrivatePage>
+            {" "}
+            <MyProfile></MyProfile>
+          </PrivatePage>
+        ),
+      },
+      {
+        path: "/dashboard/add-property",
+        element: (
+          <PrivatePage>
+            <AddProperty></AddProperty>
+          </PrivatePage>
+        ),
+      },
+      {
+        path: "/dashboard/my-property",
+        element: (
+          <PrivatePage>
+            <MyAddedProperties></MyAddedProperties>
+          </PrivatePage>
+        ),
+      },
+      {
+        path: "/dashboard/offersList",
+        element: (
+          <PrivatePage>
+            <OffersList></OffersList>
+          </PrivatePage>
+        ),
+      },
+      {
+        path: "/dashboard/admin-profile",
+        element: (
+          <PrivatePage>
+            <MyProfile></MyProfile>
+          </PrivatePage>
+        ),
+      },
+      {
+        path: "/dashboard/manage-properties",
+        element: (
+          <PrivatePage>
+            {" "}
+            <ManageProperties></ManageProperties>
+          </PrivatePage>
+        ),
+      },
+      {
+        path: "/dashboard/manage-reviews",
+        element: (
+          <PrivatePage>
+            <ManageReviews></ManageReviews>
+          </PrivatePage>
+        ),
+      },
+      {
+        path: "/dashboard/manage-users",
+        element: (
+          <PrivatePage>
+            <ManageUsers></ManageUsers>
+          </PrivatePage>
+        ),
+      },
+      {
+        path: "/dashboard/updateProperty/:id",
+        element: (
+          <PrivatePage>
+            <UpdateProperty></UpdateProperty>
+          </PrivatePage>
+        ),
+      },
+      {
+        path: "/dashboard/sold-properties",
+        element: (
+          <PrivatePage>
+            <SoldProperties></SoldProperties>
+          </PrivatePage>
+        ),
+      },
     ],
   },
 ]);

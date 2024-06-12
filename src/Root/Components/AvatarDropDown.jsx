@@ -7,7 +7,7 @@ const AvatarDropDown = () => {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-  const { user ,logout,loading} = useAuth();
+  const { user ,logout} = useAuth();
  
 
  if(user){

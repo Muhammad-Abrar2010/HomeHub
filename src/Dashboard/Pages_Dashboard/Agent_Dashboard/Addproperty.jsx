@@ -1,14 +1,15 @@
-
-
-
 import { useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/Axios/useAxiosSecure";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../../Hooks/Axios/useAxiosPublic";
 
 const AddProperty = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const imgBBSecret = import.meta.env.VITE_IMGBB_SECRET_KEY;
+  const imgBBApi = `https://api.imgbb.com/1/upload?key=${imgBBSecret}`;
+  const axiosPublic = useAxiosPublic();
   const [propertyData, setPropertyData] = useState({
     property_title: "",
     property_location: "",
@@ -38,17 +39,15 @@ const AddProperty = () => {
     };
 
     try {
-      axiosSecure
-        .post("/addproperty", propertyDetails)
-        .then(() => {
-          toast.success("data added successfully");
-          setPropertyData({
-            property_title: "",
-            property_location: "",
-            property_image: null,
-            price_range: "",
-          });
+      axiosSecure.post("/addproperty", propertyDetails).then(() => {
+        toast.success("data added successfully");
+        setPropertyData({
+          property_title: "",
+          property_location: "",
+          property_image: null,
+          price_range: "",
         });
+      });
     } catch (error) {
       console.error(error);
       alert("Error adding property");
@@ -56,9 +55,21 @@ const AddProperty = () => {
   };
 
   const uploadImage = async (file) => {
-    // Implement your image upload logic here
-    // For now, return a placeholder URL
-    return "http://example.com/uploaded-property-image.jpg";
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const response = await axiosPublic.post(imgBBApi, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      return response.data.data.url; // Assuming the URL of the uploaded image is available in the response
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      throw new Error("Failed to upload image");
+    }
   };
 
   return (
@@ -140,7 +151,7 @@ const AddProperty = () => {
             className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 bg-gray-200"
           />
         </div>
-      
+
         <div>
           <label className="block text-sm font-medium text-gray-700">
             Price Range

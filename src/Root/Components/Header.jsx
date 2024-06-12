@@ -9,7 +9,7 @@ const NavBar = () => {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-  const {user,loading} = useAuth();
+  const {user} = useAuth();
 
   return (
     <nav className="flex items-center justify-between bg-gradient-to-r from-gray-800 via-gray-900 to-black px-4 py-2 text-white shadow-lg">
