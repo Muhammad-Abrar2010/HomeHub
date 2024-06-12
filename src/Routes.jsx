@@ -18,6 +18,8 @@ import OffersList from "./Dashboard/Pages_Dashboard/Agent_Dashboard/OffersList";
 import ManageProperties from "./Dashboard/Pages_Dashboard/Admin_Dashboard/ManageProperties";
 import ManageReviews from "./Dashboard/Pages_Dashboard/Admin_Dashboard/ManageReviews";
 import ManageUsers from "./Dashboard/Pages_Dashboard/Admin_Dashboard/ManageUsers";
+import UpdateProperty from "./Dashboard/Pages_Dashboard/Agent_Dashboard/UpdateProperty";
+import SoldProperties from "./Dashboard/Pages_Dashboard/Agent_Dashboard/SoldProperties";
 
 export const router = createBrowserRouter([
   {
@@ -94,6 +96,14 @@ export const router = createBrowserRouter([
        {
         path:"/dashboard/manage-users",
         element:<ManageUsers></ManageUsers>
+       },
+       {
+        path:"/dashboard/updateProperty/:id",
+        element:<UpdateProperty></UpdateProperty>,
+       },
+       {
+        path:"/dashboard/sold-properties",
+        element:<SoldProperties></SoldProperties>
        }
     ],
   },
