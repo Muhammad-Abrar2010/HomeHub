@@ -1,6 +1,3 @@
-
-
-
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import GetEstateData from "../Hooks/GetEstateData";
@@ -45,7 +42,7 @@ const PropertyDetails = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axiosPublic.get(`/reviews`, {
+        const response = await axiosPublic.get(`/reviews/${id}`, {
           params: { estateId: id },
         });
         setReview(response.data);
@@ -125,7 +122,7 @@ const PropertyDetails = () => {
         </div>
         <div className="flex items-center text-gray-700 mb-2">
           <FaDollarSign className="mr-2" />
-          <span>Price Range: {estate.price_range}</span>
+          <span>Price Range: {estate.min_price}-{estate.max_price}</span>
         </div>
         <div className="flex items-center text-gray-700 mb-2">
           <FaCheckCircle className="mr-2" />

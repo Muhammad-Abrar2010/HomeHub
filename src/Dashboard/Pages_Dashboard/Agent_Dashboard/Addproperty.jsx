@@ -1,6 +1,3 @@
-
-
-
 import { useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/Axios/useAxiosSecure";
@@ -49,7 +46,7 @@ const AddProperty = () => {
       setPropertyData({
         property_title: "",
         property_location: "",
-        property_image: null,
+        property_image: "",
         min_price: "",
         max_price: "",
       });
@@ -161,7 +158,7 @@ const AddProperty = () => {
             Min Price
           </label>
           <input
-            type="text"
+            type="number"
             name="min_price"
             value={propertyData.min_price}
             onChange={handleChange}
@@ -174,7 +171,7 @@ const AddProperty = () => {
             Max Price
           </label>
           <input
-            type="text"
+            type="number"
             name="max_price"
             value={propertyData.max_price}
             onChange={handleChange}

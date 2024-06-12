@@ -91,6 +91,131 @@ function Dashboard() {
           </ul>
         </div>
       )}
+
+{isAgent && (
+        <div
+          className={`fixed inset-0 bg-[#1f1f1f] bg-opacity-90 z-50 transform md:hidden ${
+            isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+        >
+          <div className="flex items-center justify-end p-4">
+            <button onClick={toggleSidebar} className="focus:outline-none">
+              <MdClose className="w-8 h-8 text-white" />
+            </button>
+          </div>
+          <ul className="flex flex-col items-center gap-4 mt-10">
+            <li className="group cursor-pointer text-xl text-white">
+              <NavLink
+                exact
+                to="/dashboard/agent-profile"
+                activeClassName="active"
+                className="nav-link"
+                onClick={toggleSidebar}
+              >
+                Agent Profile
+              </NavLink>
+            </li>
+            <li className="group cursor-pointer text-xl text-white">
+              <NavLink
+                to="/dashboard/add-property"
+                activeClassName="active"
+                className="nav-link"
+                onClick={toggleSidebar}
+              >
+                Add Property
+              </NavLink>
+            </li>
+            <li className="group cursor-pointer text-xl text-white">
+              <NavLink
+                to="/dashboard/my-property"
+                activeClassName="active"
+                className="nav-link"
+                onClick={toggleSidebar}
+              >
+                My Added Property
+              </NavLink>
+            </li>
+       
+            <li className="group cursor-pointer text-xl text-white">
+              <NavLink
+                to="/dashboard/sold-properties"
+                activeClassName="active"
+                className="nav-link"
+                onClick={toggleSidebar}
+              >
+                My Sold Properties
+              </NavLink>
+            </li>
+            <li className="group cursor-pointer text-xl text-white">
+              <NavLink
+                to="/dashboard/offersList"
+                activeClassName="active"
+                className="nav-link"
+                onClick={toggleSidebar}
+              >
+                Offer List
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      )}
+
+{isAdmin && (
+        <div
+          className={`fixed inset-0 bg-[#1f1f1f] bg-opacity-90 z-50 transform md:hidden ${
+            isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+        >
+          <div className="flex items-center justify-end p-4">
+            <button onClick={toggleSidebar} className="focus:outline-none">
+              <MdClose className="w-8 h-8 text-white" />
+            </button>
+          </div>
+          <ul className="flex flex-col items-center gap-4 mt-10">
+            <li className="group cursor-pointer text-xl text-white">
+              <NavLink
+                exact
+                to="/dashboard/admin-profile"
+                activeClassName="active"
+                className="nav-link"
+                onClick={toggleSidebar}
+              >
+                Admin Profile
+              </NavLink>
+            </li>
+            <li className="group cursor-pointer text-xl text-white">
+              <NavLink
+                to="/dashboard/manage-properties"
+                activeClassName="active"
+                className="nav-link"
+                onClick={toggleSidebar}
+              >
+                Manage Properties
+              </NavLink>
+            </li>
+            <li className="group cursor-pointer text-xl text-white">
+              <NavLink
+                to="/dashboard/manage-users"
+                activeClassName="active"
+                className="nav-link"
+                onClick={toggleSidebar}
+              >
+                Manage Users
+              </NavLink>
+            </li>
+            <li className="group cursor-pointer text-xl text-white">
+              <NavLink
+                to="/dashboard/manage-reviews"
+                activeClassName="active"
+                className="nav-link"
+                onClick={toggleSidebar}
+              >
+                Manage Reviews
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      )}
       <button
         onClick={toggleSidebar}
         className="md:hidden absolute right-5 top-5 text-white bg-gray-800 p-2 rounded-full"
@@ -168,6 +293,13 @@ function Dashboard() {
                 activeclassname="active"
               >
                 My Properties
+              </NavLink>
+              <NavLink
+                to="/dashboard/sold-properties"
+                className="flex items-center mt-2 py-2 px-6 text-gray-200 hover:bg-gray-700"
+                activeclassname="active"
+              >
+                Sold-Properties
               </NavLink>
               <NavLink
                 to="/dashboard/offersList"

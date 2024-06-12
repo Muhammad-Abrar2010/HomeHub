@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/Axios/useAxiosSecure";
@@ -16,22 +15,33 @@ const Offer = () => {
 
   const handleOfferSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validate the property and price range
-    if (!property || !property.price_range) {
-      setError("Invalid property data.");
+    // if (!property || !property.price_range) {
+    //   setError("Invalid property data.");
+    //   return;
+    // }
+
+    const MinP = parseFloat(property.min_price);
+    const MaxP = parseFloat(property.max_price);
+
+    // if (isNaN(price)) {
+    //   setError("Invalid price range value.");
+    //   return;
+    // }
+
+    // if (offeredAmount === price) {
+    //   setError("Offered amount must be exactly the specified price.");
+    //   return;
+    // }
+
+    if (offeredAmount > MaxP) {
+      setError("offered amount must be lower than max price");
       return;
     }
 
-    const price = parseFloat(property.price_range);
-
-    if (isNaN(price)) {
-      setError("Invalid price range value.");
-      return;
-    }
-
-    if (offeredAmount === price) {
-      setError("Offered amount must be exactly the specified price.");
+    if (offeredAmount < MinP) {
+      setError("offered amount must be higher than min price");
       return;
     }
 

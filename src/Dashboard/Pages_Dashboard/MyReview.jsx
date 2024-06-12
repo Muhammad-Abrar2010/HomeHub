@@ -47,7 +47,6 @@ const MyReviews = () => {
               <div>
                 <h3 className="text-xl font-bold">{review.estateId}</h3>
                 <p className="text-gray-600">{review.userName}</p>
-                <p className="text-gray-600">{new Date(review.reviewTime).toLocaleDateString()}</p>
                 <p className="mt-2">{review.reviewText}</p>
               </div>
               <button

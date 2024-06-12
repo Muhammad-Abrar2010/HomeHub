@@ -19,7 +19,7 @@ const AllProperties = () => {
               <h3 className="text-lg font-semibold">{estate.property_title}</h3>
               <p className="text-gray-700 mt-2">{estate.property_location}</p>
               <p className="text-gray-700 mt-2">
-                Price Range: {estate.price_range}
+                Price Range: {estate.min_price}-{estate.max_price}
               </p>
               <p className="text-gray-700 mt-2">
                 Verification Status: {estate.verification_status}
