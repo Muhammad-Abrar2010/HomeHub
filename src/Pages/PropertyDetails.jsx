@@ -16,12 +16,12 @@ import { FadeLoader } from "react-spinners";
 import toast from "react-hot-toast";
 import useWishlist from "../Hooks/useWishlist";
 import "sweetalert2/src/sweetalert2.scss";
-import useAxiosPublic from "../Hooks/Axios/useAxiosPublic";
 import useAuth from "../Hooks/useAuth";
+import useAxiosSecure from "../Hooks/Axios/useAxiosSecure";
 
 const PropertyDetails = () => {
   const { user } = useAuth();
-  const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxiosSecure();
   const { id } = useParams();
   const estates = GetEstateData();
   const [estate, setEstate] = useState(null);

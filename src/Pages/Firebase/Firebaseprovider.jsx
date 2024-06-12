@@ -104,12 +104,22 @@ const Firebaseprovider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setLoading(false);
       setUser(currentUser);
+      if (currentUser) {
+        const userInfo = { user: currentUser.email };
+        axiosPublic.post("jwt", userInfo).then((res) => {
+          if (res.data.token) {
+            localStorage.setItem("access-token", res.data.token);
+          }
+        });
+      } else {
+        localStorage.removeItem("access-token");
+      }
       console.log("Current User", currentUser);
       return () => {
         unsubscribe();
       };
     });
-  }, []);
+  }, [axiosPublic]);
 
   const logout = () => {
     setLoading(true);

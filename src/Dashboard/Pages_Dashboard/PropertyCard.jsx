@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import useAxiosSecure from "../../Hooks/Axios/useAxiosSecure";
 import PaymentModal from "./PaymentModal ";
-// import PaymentModal from "./PaymentModal";
 
 
 const PropertyCard = ({ property, email, updatePropertiesBought }) => {
@@ -10,8 +8,7 @@ const PropertyCard = ({ property, email, updatePropertiesBought }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const stripe = useStripe();
-  const elements = useElements();
+
 
   const handlePayment = async () => {
     setIsProcessing(true);

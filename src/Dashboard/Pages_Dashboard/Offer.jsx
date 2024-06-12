@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import useAxiosPublic from "../../Hooks/Axios/useAxiosPublic";
+import useAxiosSecure from "../../Hooks/Axios/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 
 const Offer = () => {
@@ -9,7 +9,7 @@ const Offer = () => {
   const location = useLocation();
   const { property } = location.state;
   const { user } = useAuth();
-  const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxiosSecure();
 
   const [offeredAmount, setOfferedAmount] = useState("");
   const [error, setError] = useState(null);

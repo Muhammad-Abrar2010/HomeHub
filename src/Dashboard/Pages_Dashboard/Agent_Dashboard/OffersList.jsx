@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import useAxiosPublic from "../../../Hooks/Axios/useAxiosPublic";
+import useAxiosSecure from "../../../Hooks/Axios/useAxiosSecure";
 
 const OffersList = () => {
   const [offers, setOffers] = useState([]);
-  const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxiosSecure();
 
   useEffect(() => {
     const fetchOffers = async () => {

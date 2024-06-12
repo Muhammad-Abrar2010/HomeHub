@@ -1,8 +1,11 @@
+
+
+
 import { useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/Axios/useAxiosSecure";
 import toast from "react-hot-toast";
-import useAxiosPublic from "../../../Hooks/Axios/useAxiosPublic";
+import useAxiosPublic from "../../../Hooks/Axios/useAxiosPublic"; // Fixed import
 
 const AddProperty = () => {
   const { user } = useAuth();
@@ -14,7 +17,8 @@ const AddProperty = () => {
     property_title: "",
     property_location: "",
     property_image: null,
-    price_range: "",
+    min_price: "",
+    max_price: "",
   });
 
   const handleChange = (e) => {
@@ -29,28 +33,29 @@ const AddProperty = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const property_image_url = await uploadImage(propertyData.property_image);
-    const propertyDetails = {
-      ...propertyData,
-      agent_name: user?.displayName,
-      agent_email: user?.email,
-      agent_image: user?.photoURL,
-      property_image: property_image_url,
-    };
-
     try {
-      axiosSecure.post("/addproperty", propertyDetails).then(() => {
-        toast.success("data added successfully");
-        setPropertyData({
-          property_title: "",
-          property_location: "",
-          property_image: null,
-          price_range: "",
-        });
+      const property_image_url = await uploadImage(propertyData.property_image);
+      const propertyDetails = {
+        ...propertyData,
+        agent_name: user?.displayName,
+        agent_email: user?.email,
+        agent_image: user?.photoURL,
+        property_image: property_image_url,
+      };
+
+      await axiosSecure.post("/addProperty", propertyDetails);
+      toast.success("Data added successfully");
+
+      setPropertyData({
+        property_title: "",
+        property_location: "",
+        property_image: null,
+        min_price: "",
+        max_price: "",
       });
     } catch (error) {
-      console.error(error);
-      alert("Error adding property");
+      console.error("Error adding property:", error);
+      toast.error("Error adding property");
     }
   };
 
@@ -65,7 +70,7 @@ const AddProperty = () => {
         },
       });
 
-      return response.data.data.url; // Assuming the URL of the uploaded image is available in the response
+      return response.data.data.url;
     } catch (error) {
       console.error("Error uploading image:", error);
       throw new Error("Failed to upload image");
@@ -151,15 +156,27 @@ const AddProperty = () => {
             className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 bg-gray-200"
           />
         </div>
-
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Price Range
+            Min Price
           </label>
           <input
             type="text"
-            name="price_range"
-            value={propertyData.price_range}
+            name="min_price"
+            value={propertyData.min_price}
+            onChange={handleChange}
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+            required
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Max Price
+          </label>
+          <input
+            type="text"
+            name="max_price"
+            value={propertyData.max_price}
             onChange={handleChange}
             className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
             required

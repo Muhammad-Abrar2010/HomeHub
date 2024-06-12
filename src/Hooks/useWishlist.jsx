@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import useAuth from "./useAuth";
-import useAxiosPublic from "./Axios/useAxiosPublic";
+import useAxiosSecure from "./Axios/useAxiosSecure";
+// import useAxiosPublic from "./Axios/useAxiosPublic";
 
 const useWishlist = () => {
   const [wishlist, setWishlist] = useState([]);
   const { user, loading } = useAuth();
-  const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxiosSecure();
   const userEmail = loading ? null : user && user.email;
 
   useEffect(() => {

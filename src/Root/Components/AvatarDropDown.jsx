@@ -12,7 +12,7 @@ const AvatarDropDown = () => {
 
  if(user){
     return (
-        <div className="relative inline-block text-left">
+        <div className="relative inline-block text-left z-[9999]">
           <div>
             <img
               onClick={toggleDropdown}
