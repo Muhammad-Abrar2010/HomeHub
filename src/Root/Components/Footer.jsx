@@ -1,18 +1,29 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <div>
       <footer className="flex flex-col justify-around gap-5 bg-sky-50 py-8 text-black">
-    
         <nav className="text-lg">
           <ul className="flex h-full flex-wrap items-center justify-center gap-3">
             <li>
               <a className="cursor-pointer hover:underline">Home</a>
             </li>
             <li>
-              <a className="cursor-pointer hover:underline">Contact</a>
+              <Link
+                to={"/allproperties"}
+                className="cursor-pointer hover:underline"
+              >
+                Properties
+              </Link>
             </li>
             <li>
-              <a className="cursor-pointer hover:underline">About</a>
+              <Link
+                to={"/dashboard"}
+                className="cursor-pointer hover:underline"
+              >
+                Dashboard
+              </Link>
             </li>
           </ul>
         </nav>
