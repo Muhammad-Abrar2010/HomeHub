@@ -31,7 +31,7 @@ To get started with HomeHub, follow these steps:
 
 Follow these steps to set up and run the project locally.
 ```text
-git clone https://github.com/Muhammad-Abrar2010/HomeHub
+git clone https://github.com/Muhammad-Abrar2010/HomeHub.git
 cd HomeHub          
 npm i
 npm run dev(for live preview)
